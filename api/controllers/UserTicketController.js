@@ -10,85 +10,128 @@ module.exports = {
     create: function (req, res) {
 
         UserTicket.create(req.params.all(), function userTicketCreated(err, userTicket) {
-            console.log("req param" + req.params.all());
             if (err)
-                return res.serverError(err);
-            res.json({ 'TicketNo': userTicket.id });
+                return res.json({ 'success': false, 'message': err });
+            res.json({ 'success': true, 'TicketNo': userTicket.id });
 
         });
     },
 
     //update ticket status
     modifyStatus: function (req, res) {
-        console.log("ID" + req.query.Id);
-        UserTicket.update({ id: req.query.Id }, { status: req.query.Status }).exec(function afterwards(err, updated) {
+
+        UserTicket.update({ id: req.query.Id }, { status: req.query.Status }).exec(function updateTicketStatus(err, updated) {
 
             if (err) {
-                res.serverError(err);
+                return res.json({ 'success': false, 'message': err });
             }
-            res.json({ 'status': 'Status Updated Successfully' });
+            res.json({ 'success': true, 'message': 'Status Updated Successfully' });
         });
     },
 
-    //update ModifiedTo User
-    modifyModifiedTo: function (req, res) {
-        console.log("UserId" + req.query.UserId);
-        UserTicket.update({ id: req.query.Id }, { status: req.query.UserId }).exec(function afterwards(err, updated) {
+    //update ModifiedBy User
+    modifyModifiedBy: function (req, res) {
+
+        UserTicket.update({ id: req.query.Id }, { modified_by: req.query.UserId }).exec(function updateModifiedBy(err, updated) {
 
             if (err) {
-                res.serverError(err);
+                return res.json({ 'success': false, 'message': err });
             }
-            res.json({ 'status': 'User Updated Successfully' });
+            res.json({ 'success': true, 'message': 'User Updated Successfully' });
         });
     },
 
     //update AssignedTo User
     modifyAssignedTo: function (req, res) {
-        console.log("UserId" + req.query.UserId);
-        UserTicket.update({ id: req.query.Id }, { status: req.query.UserId }).exec(function afterwards(err, updated) {
+
+        UserTicket.update({ id: req.query.Id }, { assigned_to: req.query.UserId }).exec(function updateAssignedTo(err, updated) {
 
             if (err) {
-                res.serverError(err);
+                return res.json({ 'success': false, 'message': err });
             }
-            res.json({ 'status': 'User Updated Successfully' });
+            res.json({ 'success': true, 'message': 'User Updated Successfully' });
         });
     },
 
     //update AssignedBy User
     modifyAssignedBy: function (req, res) {
-        console.log("UserId" + req.query.UserId);
-        UserTicket.update({ id: req.query.Id }, { status: req.query.UserId }).exec(function afterwards(err, updated) {
+
+        UserTicket.update({ id: req.query.Id }, { assigned_by: req.query.UserId }).exec(function updateAssignedBy(err, updated) {
 
             if (err) {
-                res.serverError(err);
+                return res.json({ 'success': false, 'message': err });
             }
-            res.json({ 'status': 'User Updated Successfully' });
+            res.json({ 'success': true, 'message': 'User Updated Successfully' });
         });
     },
 
     //getAll UserTickets created by a User
-    getAllUserTickets: function (req, res, next) {
-        console.log("ID" + req.query.createdId);
+    getAllUserTickets: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
         queryAllUserTicket.where({ 'created_by': req.query.UserId });
         queryAllUserTicket.exec(function callBack(err, results) {
-             res.json(results);
+            if (err) {
+                return res.json({ 'success': false, 'message': err });
+            }
+            // console.log("Results == >"+results);
+            res.json({ 'success': true, 'message': 'Retrived all User specific tickets Successfully', results });
+
+
         });
     },
 
 
-     //getAllUserNewTickets  'new' status UserTickets  order by priority severity
-    getAllUserNewTickets: function (req, res, next) {
-        //console.log("ID" + req.query.createdId);
-        ticket_status = 3 ; //'new'
+    //getAllTicketsByStatus  'new' status UserTickets  order by priority severity
+    getAllTicketsByStatus: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
-        queryAllUserTicket.where({ 'status': ticket_status });
+        queryAllUserTicket.where({ 'status': req.query.ticket_status });
         queryAllUserTicket.sort('priority ASC');
         queryAllUserTicket.sort('severity ASC');
         queryAllUserTicket.exec(function callBack(err, results) {
-        res.json(results);
+            if (err) {
+                return res.json({ 'success': false, 'message': err });
+            }
+            res.json({ 'success': true, 'message': 'Retrived all new tickets Successfully', results });
+        });
+    },
+
+    //getAllTicketsByPriority  get all tickets by priority
+    getAllTicketsByPriority: function (req, res) {
+
+        var queryAllUserTicket = UserTicket.find();
+
+        if (req.query.ticket_status != undefined)
+            queryAllUserTicket.where({ 'priority': req.query.ticket_priority, 'status': req.query.ticket_status });
+        else
+            queryAllUserTicket.where({ 'priority': req.query.ticket_priority });
+
+        queryAllUserTicket.sort('status ASC');
+        queryAllUserTicket.exec(function callBack(err, results) {
+            if (err) {
+                return res.json({ 'success': false, 'message': err });
+            }
+            res.json({ 'success': true, 'message': 'Retrived all tickets by Priority Successfully', results });
+        });
+    },
+
+    //getAllTicketsByPriority  get all tickets by priority
+    getAllTicketsBySeverity: function (req, res) {
+
+        var queryAllUserTicket = UserTicket.find();
+
+        if (req.query.ticket_status != undefined)
+            queryAllUserTicket.where({ 'severity': req.query.ticket_severity, 'status': req.query.ticket_status });
+        else
+            queryAllUserTicket.where({ 'severity': req.query.ticket_severity });
+
+        queryAllUserTicket.sort('status ASC');
+        queryAllUserTicket.exec(function callBack(err, results) {
+            if (err) {
+                return res.json({ 'success': false, 'message': err });
+            }
+            res.json({ 'success': true, 'message': 'Retrived all tickets by Severity Successfully', results });
         });
     },
 }
