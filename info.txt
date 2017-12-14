@@ -1,0 +1,44 @@
+
+
+User.create({user_name:'Shan', user_email:'shan@gmail.com',first_name:'Shunmugam',last_name:'Ramanathan'}).exec(console.log)
+User.create({user_name:'Clement', user_email:'clement@gmail.com',first_name:'Clement',last_name:'Rajesh'}).exec(console.log)
+User.create({user_name:'Mani', user_email:'mani@gmail.com',first_name:'Mani',last_name:'kandan'}).exec(console.log)
+User.create({user_name:'Ram', user_email:'ram@gmail.com',first_name:'Rama',last_name:'Nathan'}).exec(console.log)
+
+
+Asset.create({asset_name: 'DELL', asset_type: 'laptop', assigned_to : 1, asset_desc:'assigned to shan'}).exec(console.log)
+Asset.create({asset_name: 'IBM', asset_type: 'laptop', assigned_to : 1, asset_desc:'assigned to Clement'}).exec(console.log)
+Asset.create({asset_name: 'LENOVA', asset_type: 'laptop', assigned_to : 1, asset_desc:'assigned to Mani'}).exec(console.log)
+Asset.create({asset_name: 'DELL', asset_type: 'desktop', assigned_to : 1, asset_desc:'assigned to Ram'}).exec(console.log)
+
+Priority.create({priority_name: 'Critical', priority_desc:'Critical'}).exec(console.log)
+Priority.create({priority_name: 'High', priority_desc:'High'}).exec(console.log)
+Priority.create({priority_name: 'Medium', priority_desc:'Medium'}).exec(console.log)
+Priority.create({priority_name: 'Low', priority_desc:'Low'}).exec(console.log)
+
+
+Severity.create({severity_name: 'Critical', severity_desc:'Critical'}).exec(console.log)
+Severity.create({severity_name: 'High', severity_desc:'High'}).exec(console.log)
+Severity.create({severity_name: 'Medium', severity_desc:'Medium'}).exec(console.log)
+Severity.create({severity_name: 'Low', severity_desc:'Low'}).exec(console.log)
+
+Status.create({status_name: 'new', status_desc:'new'}).exec(console.log)
+Status.create({status_name: 'assigned', status_desc:'assigned to sys admin'}).exec(console.log)
+Status.create({status_name: 'in-progress', status_desc:'in-progress'}).exec(console.log)
+Status.create({status_name: 'pending', status_desc:'pending from user/other operational reasons'}).exec(console.log)
+Status.create({status_name: 'resolved', status_desc:'resolved by sys admin'}).exec(console.log)
+Status.create({status_name: 'closed', status_desc:'closed by user or administrator'}).exec(console.log)
+Status.create({status_name: 'invalid', status_desc:'invalid ticket'}).exec(console.log)
+Status.create({status_name: 're-open', status_desc:'re-opened by user or administrator'}).exec(console.log)
+
+
+UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:3, created_dt: '2017-12-11T10:08:35.099Z',modified_by:2,modified_dt : '2017-12-11T10:08:35.099Z', assigned_to :4, assigned_by :1}).exec(console.log)
+
+
+http://localhost:1337/userTicket/create?ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:3, created_dt: '2017-12-11T10:08:35.099Z',modified_by:2,modified_dt : '2017-12-11T10:08:35.099Z', assigned_to :4, assigned_by :1
+
+
+
+
+
+
