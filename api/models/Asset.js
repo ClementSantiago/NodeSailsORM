@@ -10,7 +10,7 @@ module.exports = {
     asset_name: 'string',
     asset_type: 'string',
     assigned_to: {
-      collection : 'user'
+      model : 'user'
     },
     asset_desc: 'string'
   }

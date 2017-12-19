@@ -6,6 +6,8 @@
  */
 
 module.exports = {
+    // URL prefix to proceed
+    _config: { prefix: '/api/helpdesk' },
     //Create new Ticket
     create: function (req, res) {
 
@@ -74,6 +76,9 @@ module.exports = {
             if (err) {
                 return res.json({ 'success': false, 'message': err });
             }
+            if (Object.keys(results).length == 0) {
+                return res.json({ 'success': false, 'message': 'No Data fetched from DB' });
+            }
             // console.log("Results == >"+results);
             res.json({ 'success': true, 'message': 'Retrived all User specific tickets Successfully', results });
 
@@ -93,12 +98,15 @@ module.exports = {
             if (err) {
                 return res.json({ 'success': false, 'message': err });
             }
+            if (Object.keys(results).length == 0) {
+                return res.json({ 'success': false, 'message': 'No Data fetched from DB' });
+            }
             res.json({ 'success': true, 'message': 'Retrived all new tickets Successfully', results });
         });
     },
 
     //getAllTicketsByPriority  get all tickets by priority
-    getAllTicketsByPriority: function (req, res) {
+    getAllTicketsByPriorityStatus: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
 
@@ -112,12 +120,15 @@ module.exports = {
             if (err) {
                 return res.json({ 'success': false, 'message': err });
             }
+            if (Object.keys(results).length == 0) {
+                return res.json({ 'success': false, 'message': 'No Data fetched from DB' });
+            }
             res.json({ 'success': true, 'message': 'Retrived all tickets by Priority Successfully', results });
         });
     },
 
     //getAllTicketsByPriority  get all tickets by priority
-    getAllTicketsBySeverity: function (req, res) {
+    getAllTicketsBySeverityStatus: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
 
@@ -130,6 +141,9 @@ module.exports = {
         queryAllUserTicket.exec(function callBack(err, results) {
             if (err) {
                 return res.json({ 'success': false, 'message': err });
+            }
+            if (Object.keys(results).length == 0) {
+                return res.json({ 'success': false, 'message': 'No Data fetched from DB' });
             }
             res.json({ 'success': true, 'message': 'Retrived all tickets by Severity Successfully', results });
         });
