@@ -45,30 +45,15 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-'get /userTicket/getAllUserTickets?:id': {
-        controller: 'userTicket',
-        action: 'getAllUserTickets',
-        skipAssets: 'true',
-        //swagger path object
-        swagger: {
-            methods: ['GET', 'POST'],
-            summary: ' Get Groups ',
-            description: 'Get Groups Description',
-            produces: [
-                'application/json'
-            ],
-            tags: [
-                'Groups'
-            ],
-            responses: {
-                '200': {
-                    description: 'List of Groups',
-                    schema: 'Group', // api/model/Group.js,
-                    type: 'array'
-                }
-            },
-            parameters: []
-
-        }
-    },
+  'get /userTicket/getAllUserTickets': {
+    controller: 'UserTicketController',
+    action: 'getAllUserTickets',
+    swagger: {
+      body: {
+        UserId: { type: 'string', required: true },
+     //   password: { type: 'password', required: true }
+      }, //for post and put
+      query: [] //for get and others
+    }
+  },
 };
