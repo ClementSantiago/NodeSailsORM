@@ -34,7 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  },
+  }, 
 
   /***************************************************************************
   *                                                                          *
@@ -45,7 +45,7 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'get /userTicket/getAllUserTickets': {
+/*  'get /userTicket/getAllUserTickets': {
     controller: 'UserTicketController',
     action: 'getAllUserTickets',
     swagger: {
@@ -56,4 +56,5 @@ module.exports.routes = {
       query: [] //for get and others
     }
   },
-};
+ */
+ };

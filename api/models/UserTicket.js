@@ -29,14 +29,8 @@ module.exports = {
     created_by: {
       model: 'user'
     },
-    created_dt: {
-      type: 'date'
-    },
     modified_by: {
       model: 'user'
-    },
-    modified_dt: {
-      type: 'date'
     },
     assigned_to: {
       model: 'user'

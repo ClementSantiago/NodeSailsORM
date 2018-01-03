@@ -8,6 +8,11 @@
 module.exports = {
 
   attributes: {
+    status_id: {
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+     },
     status_name: 'string',
     status_desc: 'string'
   }

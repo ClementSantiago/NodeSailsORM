@@ -22,7 +22,7 @@ module.exports = {
     //update ticket status
     modifyStatus: function (req, res) {
 
-        UserTicket.update({ id: req.query.Id }, { status: req.query.Status }).exec(function updateTicketStatus(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { status_id: req.query.statusId }).exec(function updateTicketStatus(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -34,7 +34,7 @@ module.exports = {
     //update ModifiedBy User
     modifyModifiedBy: function (req, res) {
 
-        UserTicket.update({ id: req.query.Id }, { modified_by: req.query.UserId }).exec(function updateModifiedBy(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { modified_by: req.query.UserId }).exec(function updateModifiedBy(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -46,7 +46,7 @@ module.exports = {
     //update AssignedTo User
     modifyAssignedTo: function (req, res) {
 
-        UserTicket.update({ id: req.query.Id }, { assigned_to: req.query.UserId }).exec(function updateAssignedTo(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { assigned_to: req.query.UserId }).exec(function updateAssignedTo(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -58,7 +58,7 @@ module.exports = {
     //update AssignedBy User
     modifyAssignedBy: function (req, res) {
 
-        UserTicket.update({ id: req.query.Id }, { assigned_by: req.query.UserId }).exec(function updateAssignedBy(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { assigned_by: req.query.UserId }).exec(function updateAssignedBy(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -91,7 +91,7 @@ module.exports = {
     getAllTicketsByStatus: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
-        queryAllUserTicket.where({ 'status': req.query.ticket_status });
+        queryAllUserTicket.where({ 'status': req.query.ticketStatus });
         queryAllUserTicket.sort('priority ASC');
         queryAllUserTicket.sort('severity ASC');
         queryAllUserTicket.exec(function callBack(err, results) {
@@ -110,10 +110,10 @@ module.exports = {
 
         var queryAllUserTicket = UserTicket.find();
 
-        if (req.query.ticket_status != undefined)
-            queryAllUserTicket.where({ 'priority': req.query.ticket_priority, 'status': req.query.ticket_status });
+        if (req.query.ticketStatus != undefined)
+            queryAllUserTicket.where({ 'priority': req.query.ticketPriority, 'status': req.query.ticketStatus });
         else
-            queryAllUserTicket.where({ 'priority': req.query.ticket_priority });
+            queryAllUserTicket.where({ 'priority': req.query.ticketPriority });
 
         queryAllUserTicket.sort('status ASC');
         queryAllUserTicket.exec(function callBack(err, results) {
@@ -132,10 +132,10 @@ module.exports = {
 
         var queryAllUserTicket = UserTicket.find();
 
-        if (req.query.ticket_status != undefined)
-            queryAllUserTicket.where({ 'severity': req.query.ticket_severity, 'status': req.query.ticket_status });
+        if (req.query.ticketStatus != undefined)
+            queryAllUserTicket.where({ 'severity': req.query.ticketSeverity, 'status': req.query.ticketStatus });
         else
-            queryAllUserTicket.where({ 'severity': req.query.ticket_severity });
+            queryAllUserTicket.where({ 'severity': req.query.ticketSeverity });
 
         queryAllUserTicket.sort('status ASC');
         queryAllUserTicket.exec(function callBack(err, results) {

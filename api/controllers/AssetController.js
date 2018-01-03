@@ -8,11 +8,14 @@
 module.exports = {
     // URL prefix to proceed
     _config: { prefix: '/api/helpdesk' },
-    //Create new Ticket
+    //Validate Asset
     validateAsset: function (req, res) {
+        console.log("inside validat Asset");
         var queryAllAsset = Asset.find();
-        queryAllAsset.where({ 'asset_id': req.query.AssetId });
+        queryAllAsset.where({ 'asset_name': req.query.Asset , 'assigned_to': req.query.UserId});
+        console.log("inside validat Asset after where condition");
         queryAllAsset.exec(function callBack(err, results) {
+            console.log("inside validat Asset after executionn");
             if (err) {
                 return res.json({ 'success': false, 'message': err });
             }
@@ -23,7 +26,7 @@ module.exports = {
             res.json({ 'success': true, 'message': 'Retrived all User specific tickets Successfully', results });
 
 
-        });
+        }); 
     },
 };
 

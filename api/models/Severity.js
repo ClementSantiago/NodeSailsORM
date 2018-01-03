@@ -8,6 +8,11 @@
 module.exports = {
 
   attributes: {
+    severity_id: {
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+     },
     severity_name: 'string',
     severity_desc: 'string'
   }

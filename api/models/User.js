@@ -8,6 +8,11 @@
 module.exports = {
 
   attributes: {
+    user_id: {
+      type: 'string',
+      unique: true,
+      primaryKey: true
+     },
     user_name: 'string',
     user_email: 'string',
     first_name: 'string',

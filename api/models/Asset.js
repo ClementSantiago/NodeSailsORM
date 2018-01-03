@@ -7,6 +7,11 @@
 
 module.exports = {
   attributes: {
+    asset_id: {
+      type: 'string',
+      unique: true,
+      primaryKey: true
+     },
     asset_name: 'string',
     asset_type: 'string',
     assigned_to: {

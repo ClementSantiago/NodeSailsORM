@@ -8,6 +8,11 @@
 module.exports = {
 
   attributes: {
+    priority_id: {
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+     },
     priority_name: 'string',
     priority_desc: 'string'
   }
