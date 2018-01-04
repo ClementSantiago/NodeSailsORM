@@ -22,7 +22,7 @@ module.exports = {
     //update ticket status
     modifyStatus: function (req, res) {
 
-        UserTicket.update({ id: req.query.ticketId }, { status_id: req.query.statusId }).exec(function updateTicketStatus(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { status: req.query.statusId }).exec(function updateTicketStatus(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -91,7 +91,9 @@ module.exports = {
     getAllTicketsByStatus: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
-        queryAllUserTicket.where({ 'status': req.query.ticketStatus });
+        if (req.query.ticketStatus != undefined) {
+            queryAllUserTicket.where({ 'status': req.query.ticketStatus });
+        }
         queryAllUserTicket.sort('priority ASC');
         queryAllUserTicket.sort('severity ASC');
         queryAllUserTicket.exec(function callBack(err, results) {
@@ -138,6 +140,47 @@ module.exports = {
             queryAllUserTicket.where({ 'severity': req.query.ticketSeverity });
 
         queryAllUserTicket.sort('status ASC');
+        queryAllUserTicket.exec(function callBack(err, results) {
+            if (err) {
+                return res.json({ 'success': false, 'message': err });
+            }
+            if (Object.keys(results).length == 0) {
+                return res.json({ 'success': false, 'message': 'No Data fetched from DB' });
+            }
+            res.json({ 'success': true, 'message': 'Retrived all tickets by Severity Successfully', results });
+        });
+    },
+
+    /**  Method Name    :   getTickets
+     *   Purpose        :   get all user(s) tickets based on userid or all, priority, severity, status
+     *   @return        :   Return found tickets in json format
+     *   @error         :   Return error message
+     **/
+    getTickets: function (req, res) {
+        var queryAllUserTicket = UserTicket.find();
+
+        if (req.query.userId != undefined || req.query.userId != null) {
+            queryAllUserTicket.where({ 'created_by': req.query.userId });
+        }
+
+        if (req.query.ticketStatus != undefined || req.query.ticketStatus != null) {
+            queryAllUserTicket.where({ 'status': req.query.ticketStatus });
+        }
+
+
+        if (req.query.ticketSeverity != undefined || req.query.ticketSeverity != null) {
+            queryAllUserTicket.where({ 'severity': req.query.ticketSeverity });
+        }
+
+        if (req.query.ticketPriority != undefined || req.query.ticketPriority != null) {
+            queryAllUserTicket.where({ 'priority': req.query.ticketPriority });
+        }
+
+
+        queryAllUserTicket.sort('priority ASC');
+        queryAllUserTicket.sort('severity ASC');
+        queryAllUserTicket.sort('status ASC');
+
         queryAllUserTicket.exec(function callBack(err, results) {
             if (err) {
                 return res.json({ 'success': false, 'message': err });

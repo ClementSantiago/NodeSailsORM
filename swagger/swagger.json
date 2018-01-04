@@ -17,9 +17,6 @@
     },
     "host": "localhost:1337",
     "basePath": "/",
-    "externalDocs": {
-        "url": "http://theophilus.ziippii.com"
-    },
     "tags": [
         {
             "name": "User"

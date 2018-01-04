@@ -42,12 +42,25 @@ UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue
 
 
 
-Create Ticket		:		http://192.168.61.153:1337/api/helpdesk/userTicket/create?ticket_title='Monitor not working'&ticket_desc='Monitor is not switching on'&priority=1&severity=1&status=1&asset='ram-lp'&created_by='S8888'
-Get all user ticket : 		http://192.168.61.153:1337/api/helpdesk/userTicket/getAllUserTickets?userId=3
+Create Ticket			:		http://192.168.61.153:1337/api/helpdesk/userTicket/create?ticket_title='Monitor not working'&ticket_desc='Monitor is not switching on'&priority=1&severity=1&status=1&asset='ram-lp'&created_by='S8888'
+
+Modify Ticket Status 	:		http://192.168.61.153:1337/api/helpdesk/userTicket/modifyStatus?ticketId=1&statusId=3
+Modify ModifiedBY User	:		http://192.168.61.153:1337/api/helpdesk/userTicket/modifyModifiedBy?ticketId=1&userId=C2508
+Modify Assigned TO	  	:		http://192.168.61.153:1337/api/helpdesk/userTicket/modifyAssignedTo?ticketId=1&userId=R2527
+Modify Assigned By		:		http://192.168.61.153:1337/api/helpdesk/userTicket/modifyAssignedBy?ticketId=1&userId=S8888
+
+Get all user ticket 	: 		http://192.168.61.153:1337/api/helpdesk/userTicket/getAllUserTickets?userId=3
+Get all ticket by Status:		http://192.168.61.153:1337/api/helpdesk/userTicket/getAllTicketsByStatus?ticketStatus=1
+Get all priority &status:		http://192.168.61.153:1337/api/helpdesk/userTicket/getAllTicketsByPriorityStatus?ticketPriority=1&ticketStatus=3
+Get all severity &status:		http://192.168.61.153:1337/api/helpdesk/userTicket/getAllTicketsBySeverityStatus?ticketSeverity=1&ticketStatus=3
+
+Get Tickets				: 		http://192.168.61.153:1337/api/helpdesk/userTicket/getTickets?userId=S8888&ticketSeverity=1&ticketStatus=3
 
 
 
-Validate Asset 		:		http://192.168.61.153:1337/api/helpdesk/asset/validateAsset?assetId=3&userId=2
+
+
+Validate Asset 		:		http://192.168.61.153:1337/api/helpdesk/asset/validateAsset?assetId=ram-lp&userId=R2527
 Get Asset By User	: 		http://192.168.61.153:1337/api/helpdesk/asset/getAssetByUser?userId=R2527
 
 
