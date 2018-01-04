@@ -34,7 +34,7 @@ module.exports = {
     //update ModifiedBy User
     modifyModifiedBy: function (req, res) {
 
-        UserTicket.update({ id: req.query.ticketId }, { modified_by: req.query.UserId }).exec(function updateModifiedBy(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { modified_by: req.query.userId }).exec(function updateModifiedBy(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -46,7 +46,7 @@ module.exports = {
     //update AssignedTo User
     modifyAssignedTo: function (req, res) {
 
-        UserTicket.update({ id: req.query.ticketId }, { assigned_to: req.query.UserId }).exec(function updateAssignedTo(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { assigned_to: req.query.userId }).exec(function updateAssignedTo(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -58,7 +58,7 @@ module.exports = {
     //update AssignedBy User
     modifyAssignedBy: function (req, res) {
 
-        UserTicket.update({ id: req.query.ticketId }, { assigned_by: req.query.UserId }).exec(function updateAssignedBy(err, updated) {
+        UserTicket.update({ id: req.query.ticketId }, { assigned_by: req.query.userId }).exec(function updateAssignedBy(err, updated) {
 
             if (err) {
                 return res.json({ 'success': false, 'message': err });
@@ -71,7 +71,7 @@ module.exports = {
     getAllUserTickets: function (req, res) {
 
         var queryAllUserTicket = UserTicket.find();
-        queryAllUserTicket.where({ 'created_by': req.query.UserId });
+        queryAllUserTicket.where({ 'created_by': req.query.userId });
         queryAllUserTicket.exec(function callBack(err, results) {
             if (err) {
                 return res.json({ 'success': false, 'message': err });

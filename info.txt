@@ -34,14 +34,20 @@ Status.create({status_id:7,status_name: 'invalid', status_desc:'invalid ticket'}
 Status.create({status_id:8,status_name: 're-open', status_desc:'re-opened by user or administrator'}).exec(console.log)
 
 
-UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:'S8888',modified_by:'S8888', assigned_to :'C2508', assigned_by :'S8888'}).exec(console.log)
-UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:'C2508',modified_by:'S8888', assigned_to :'M2502', assigned_by :'S8888'}).exec(console.log)
-UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:'M2502',modified_by:'M2502', assigned_to :'R2527', assigned_by :'M2502'}).exec(console.log)
-UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:'R2527',modified_by:'R2527', assigned_to :'V2528', assigned_by :'R2527'}).exec(console.log)
-UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:1 ,priority:1,severity:1, created_by:'V2528',modified_by:'V2528', assigned_to :'C2508', assigned_by :'V2528'}).exec(console.log)
+UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:'mani-lp' ,priority:1,severity:1, created_by:'S8888',modified_by:'S8888', assigned_to :'C2508', assigned_by :'S8888'}).exec(console.log)
+UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:'ram-lp'  ,priority:1,severity:1, created_by:'C2508',modified_by:'S8888', assigned_to :'M2502', assigned_by :'S8888'}).exec(console.log)
+UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:'vijo-dk' ,priority:1,severity:1, created_by:'M2502',modified_by:'M2502', assigned_to :'R2527', assigned_by :'M2502'}).exec(console.log)
+UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:'clem-dk' ,priority:1,severity:1, created_by:'R2527',modified_by:'R2527', assigned_to :'V2528', assigned_by :'R2527'}).exec(console.log)
+UserTicket.create({ticket_title:'Getting Blue Screen', ticket_desc:'Getting Blue Screen', status:1, asset:'shan-lp' ,priority:1,severity:1, created_by:'V2528',modified_by:'V2528', assigned_to :'C2508', assigned_by :'V2528'}).exec(console.log)
 
 
 
+Create Ticket		:		http://192.168.61.153:1337/api/helpdesk/userTicket/create?ticket_title='Monitor not working'&ticket_desc='Monitor is not switching on'&priority=1&severity=1&status=1&asset='ram-lp'&created_by='S8888'
+Get all user ticket : 		http://192.168.61.153:1337/api/helpdesk/userTicket/getAllUserTickets?userId=3
 
+
+
+Validate Asset 		:		http://192.168.61.153:1337/api/helpdesk/asset/validateAsset?assetId=3&userId=2
+Get Asset By User	: 		http://192.168.61.153:1337/api/helpdesk/asset/getAssetByUser?userId=R2527
 
 
